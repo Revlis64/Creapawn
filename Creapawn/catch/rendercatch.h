@@ -4,8 +4,8 @@ void renderCatch()
 {
   if (emptyBoxIndex != invalidBoxIndex)
   {
-    drawTextBox(53, 0, 46, 6, WHITE);
-    tinyfont.print(F("ADD PAWN?"));
+    drawTextBox(53, 0, 51, 6, WHITE);
+    tinyfont.print(F("KEEP PAWN?"));
     drawTextBox(0, 43, 31, 6, WHITE);
     tinyfont.print(F("(A)YES"));
     drawTextBox(0, 50, 31, 6, WHITE);
