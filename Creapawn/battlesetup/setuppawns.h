@@ -14,6 +14,7 @@ void setupPawns()
   for (uint8_t index = 0; index < 6; ++index)
   {
     pawn[index].draw = false;
+    pawn[index].damage = 0;
     if (pawn[index].zodiac != Zodiac::None)
     {
      pawn[index].draw = true;

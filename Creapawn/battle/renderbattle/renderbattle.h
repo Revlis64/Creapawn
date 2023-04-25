@@ -47,7 +47,7 @@ void drawNameBoxes()
 
               case AttackTarget::AllAllies:
               {
-                energyDrawIndex = (pawn[nameBoxCounter].energy == pawn[nameBoxCounter].maxEnergy) ? true : pawn[nameBoxCounter].draw;
+                energyDrawIndex = ((pawn[nameBoxCounter].energy == pawn[nameBoxCounter].maxEnergy) || (pawn[nameBoxCounter].energy == 0)) ? true : pawn[nameBoxCounter].draw;
                 break;
               }
 
