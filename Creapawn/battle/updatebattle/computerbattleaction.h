@@ -329,11 +329,11 @@ void updateComputerBattleAction()
     case BattleAction::Target:
     {
       computerActionTaken = true;
+      pawn[selectedPawn].direction = Direction::Left;
       switch (computerAction)
       {
         case ComputerAction::Move:
         {
-          pawn[selectedPawn].direction = Direction::Left;
           board[selectedSquareY][selectedSquareX] = board[selectedPawnY][selectedPawnX];
           board[selectedPawnY][selectedPawnX] = blankTile;
           actionPoints[1] -= pawn[selectedPawn].actionCost;
