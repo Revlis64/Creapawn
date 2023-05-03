@@ -20,9 +20,6 @@
   @Pharap
 */
 
-//For those interested in looking through the code, I am working on leaving comments on functions to explain
-//what they do and should be done within the following days, so please bare with me. Thank you for your interest!
-
 #include <Arduboy2.h>
 #include <Tinyfont.h>
 #include <EEPROM.h>
