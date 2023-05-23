@@ -247,7 +247,7 @@ void drawCenterMenu()
   {
     drawTextBox(20, 22, 21, 6, 1);
     tinyfont.print("SKIP");
-  } else arduboy.drawBitmap(27, 23, downTriangle, 8, 8, 1);
+  } else arduboy.drawBitmap(28, 23, downTriangle, 8, 8, 1);
 }
 
 void renderBattle()
@@ -263,7 +263,7 @@ void renderBattle()
   }
   if ((turn == Turn::Opponent) || ((turn == Turn::Neither) && (battleVictory == false)))
     drawCenterMenu();
-    else arduboy.drawBitmap(27, 23, upTriangle, 8, 8, 1);
+    else arduboy.drawBitmap(28, 23, upTriangle, 8, 8, 1);
 
   renderBoard();
   if (turn == Turn::Neither)

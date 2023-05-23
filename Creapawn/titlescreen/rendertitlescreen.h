@@ -39,11 +39,11 @@ void renderTitleScreen()
     }
     case TitleScreenState::ConfirmNewGame:
     {
-      drawTextBox(18, 0, 91, 6, WHITE);
-      tinyfont.print(F("DELETE PRIOR SAVE?"));
-      drawTextBox(18, 8, 31, 6, WHITE);
+      drawTextBox(16, 0, 96, 6, WHITE);
+      tinyfont.print(F("ERASE CURRENT GAME?"));
+      drawTextBox(16, 8, 31, 6, WHITE);
       tinyfont.print(F("(A)YES"));
-      drawTextBox(18, 16, 31, 6, WHITE);
+      drawTextBox(16, 16, 31, 6, WHITE);
       tinyfont.print(F("(B)NO!"));
       break;
     }

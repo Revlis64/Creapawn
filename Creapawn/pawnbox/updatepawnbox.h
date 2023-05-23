@@ -249,7 +249,7 @@ void updatePawnBox()
               break;
             }
           }
-          optionSelection = 0;
+          optionSelection = 3;
           boxState = BoxState::SelectPawn;
         } else boxState = BoxState::CannotDoAction;
       }
