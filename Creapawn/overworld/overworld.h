@@ -6,7 +6,7 @@ uint8_t speciesNumber[3];
 uint8_t level[3];
 uint8_t zodiacNumber[3];
 uint8_t entitySpeciesNumber = 0;
-Species entitySpecies;
+Species entitySpecies = Species::Voidismal;
 uint8_t walkCycle = 0;
 uint8_t priorEnemyWalkCycle = 0;
 uint8_t priorWalkCycle = 0;

@@ -42,9 +42,9 @@ const uint8_t invalidTile = 7;
 const uint8_t validTile = 8;
 const uint8_t invalidPawnIndex = 6;
 
-bool firstTurn;
-Turn turn;
-ComputerAction computerAction;
+bool firstTurn = false;
+Turn turn = Turn::Neither;
+ComputerAction computerAction = ComputerAction::None;
 AttackTarget attackTarget;
 uint8_t actionPoints[2] = {5, 5};
 BattleAction battleAction;

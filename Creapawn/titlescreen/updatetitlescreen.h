@@ -8,7 +8,7 @@ bool checkForSave()
   EEPROM.get(address, travelDistanceCheck);
   overworldCounterCheck = EEPROM.read(address + 2);
 
-  if ((travelDistanceCheck <= 3200) && (overworldCounterCheck < 10))
+  if ((travelDistanceCheck <= 3200) && (overworldCounterCheck <= 10))
     return true;
   return false;
 }

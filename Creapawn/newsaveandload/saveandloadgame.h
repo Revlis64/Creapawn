@@ -68,14 +68,22 @@ void loadGameData()
   team[2] = EEPROM.read(address + 10);
   for (uint8_t index = 0; index < 3; ++index)
   {
-    unpackPawn(pawn[index], team[index]);
-    createStats(pawn[index]);
+    if (team[index] != invalidTeamSlot)
+    {
+      unpackPawn(pawn[index], team[index]);
+      createStats(pawn[index]);
+    } else clearPawn(pawn[index]);
   }
   if ((travelDistance == 3200) && (newGamePlus))
   {
     presentEntity = false;
+    entityIdentity = Identity::None;
     travelDistance = 0;
     overworldCounter = 0;
   }
+    entitySpecies = (entityIdentity == Identity::Pawn) ? getSpecies(random(0, 32)) : Species::Voidismal;
+
+      //EEPROM.update(address + 12, static_cast <uint8_t> (entitySpecies));
+    //entitySpecies = static_cast <Species> (EEPROM.read(address + 12));
   gameState = GameState::Overworld;
 }

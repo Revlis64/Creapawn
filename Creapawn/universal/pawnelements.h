@@ -199,8 +199,6 @@ const uint8_t zodiacStats[13][3]
   /*SAGITTARIUS*/{2, 0, 2},
 };
 
-
-
 struct Pawn 
 {
   Species species;
@@ -399,4 +397,10 @@ void healAllPawns()
     if (index < 3)
       pawn[index].energy = pawn[index].maxEnergy;
   }
+}
+
+void clearPawn(Pawn & pawn)
+{
+  pawn.zodiac = Zodiac::None;
+  pawn.energy = 0;
 }

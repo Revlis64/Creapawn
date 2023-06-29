@@ -149,6 +149,13 @@ void updateWalking()
 }
 
 
+void getCastleLevel(uint8_t baseLevel)
+{
+  for (uint8_t index = 0; index < 3; ++index)
+    level[index] = (!newGamePlus) ? baseLevel : 9;
+}
+
+
 
 void determineCastleTeam()
 {
@@ -163,13 +170,11 @@ void determineCastleTeam()
     {
       speciesNumber[0] = 28;
       zodiacNumber[0] = 7;
-      level[0] = (!newGamePlus) ? 8 : 9;
       speciesNumber[1] = 22;
       zodiacNumber[1] = 6;
-      level[1] = (!newGamePlus) ? 8 : 9;
       speciesNumber[2] = 26;
       zodiacNumber[2] = 3;
-      level[2] = (!newGamePlus) ? 8 : 9;
+      getCastleLevel(8);
       break;
     }
 
@@ -177,13 +182,11 @@ void determineCastleTeam()
     {
       speciesNumber[0] = 19;
       zodiacNumber[0] = 12;
-      level[0] = (!newGamePlus) ? 6 : 9;
       speciesNumber[1] = 11;
       zodiacNumber[1] = 11;
-      level[1] = (!newGamePlus) ? 6 : 9;
       speciesNumber[2] = 14;
       zodiacNumber[2] = 10;
-      level[2] = (!newGamePlus) ? 6 : 9;
+      getCastleLevel(6);
       break;
     }
 
@@ -191,13 +194,11 @@ void determineCastleTeam()
     {
       speciesNumber[0] = 1;
       zodiacNumber[0] = 2;
-      level[0] = (!newGamePlus) ? 4 : 9;
       speciesNumber[1] = 2;
       zodiacNumber[1] = 4;
-      level[1] = (!newGamePlus) ? 4 : 9;
       speciesNumber[2] = 4;
       zodiacNumber[2] = 8;
-      level[2] = (!newGamePlus) ? 4 : 9;
+      getCastleLevel(4);
       break;
     }
 
@@ -205,13 +206,11 @@ void determineCastleTeam()
     {
       speciesNumber[0] = 31;
       zodiacNumber[0] = 9;
-      level[0] = 9;
       speciesNumber[1] = 20;
       zodiacNumber[1] = 1;
-      level[1] = 9;
       speciesNumber[2] = 29;
       zodiacNumber[2] = 5;
-      level[2] = 9;
+      getCastleLevel(9);
       break;
     }
   }

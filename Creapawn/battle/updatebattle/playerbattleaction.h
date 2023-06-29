@@ -67,7 +67,7 @@ void movePlayerPawnAndActionCursor()
     if (selectedPawn < 2)
     {
       for (uint8_t pawnSelectionCounter = (selectedPawn + 1); pawnSelectionCounter < 3; ++pawnSelectionCounter)
-        if(pawn[pawnSelectionCounter].energy > 0)
+        if ((pawn[pawnSelectionCounter].energy > 0) && (pawn[pawnSelectionCounter].zodiac != Zodiac::None))
         {
           selectedPawn = pawnSelectionCounter;
           break;

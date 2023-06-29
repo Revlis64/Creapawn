@@ -10,10 +10,10 @@ void renderVictory()
       drawPawn(pawn[index].species, 0, index * 16, BLACK, Direction::Right);
 
       tinyfont.setTextColor(WHITE);
-      tinyfont.setCursor(16, index * 16);
+      tinyfont.setCursor(17, index * 16);
       tinyfont.print("LV");
       tinyfont.print(pawn[index].level);
-      tinyfont.setCursor(16, 5 + (index * 16));
+      tinyfont.setCursor(17, 5 + (index * 16));
       tinyfont.print("XP");
       determineZeroPrint(pawn[index].experience);
       tinyfont.print(pawn[index].experience);

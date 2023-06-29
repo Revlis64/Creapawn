@@ -14,8 +14,8 @@ void updateNewGame()
   pawn[2].zodiac = Zodiac::None;
   packAndSavePawn(pawn[0], 0);
   team[0] = 0;
-  team[1] = 32;
-  team[2] = 32;
+  team[1] = invalidTeamSlot;
+  team[2] = invalidTeamSlot;
   herb = 5;
   saveDestination = SaveDestination::World;
   gameState = GameState::Save;

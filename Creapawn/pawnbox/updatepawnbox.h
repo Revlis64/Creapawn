@@ -99,8 +99,7 @@ void createTeam()
 {
   for(uint8_t index = 0; index < 3; ++index)
   {
-    pawn[index].zodiac = Zodiac::None;
-    pawn[index].energy = 0;
+    clearPawn(pawn[index]);
     if (team[index] != invalidTeamSlot)
     {
       unpackPawn(pawn[index], team[index]);
@@ -129,14 +128,13 @@ void updatePawnBox()
     {
       for (uint8_t index = 0; index < 3; ++index)
       {
-        if (pawn[index].zodiac != Zodiac::None)
-          packAndSavePawn(pawn[index], team[index]);
-        if ((pawn[index].energy == 0) || (pawn[index].zodiac == Zodiac::None))
+        if ((pawn[index].energy == 0))
           team[index] = invalidTeamSlot;
       }
       shiftTeam();
       if (team[0] == invalidTeamSlot)
         shiftTeam();
+      saveTeamPositions();
       boxState = BoxState::SelectPawn;
       break;
     }
