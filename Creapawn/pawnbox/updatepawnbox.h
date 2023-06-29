@@ -128,7 +128,7 @@ void updatePawnBox()
     {
       for (uint8_t index = 0; index < 3; ++index)
       {
-        if ((pawn[index].energy == 0))
+        if ((pawn[index].energy == 0) || (pawn[index].zodiac == Zodiac::None))
           team[index] = invalidTeamSlot;
       }
       shiftTeam();
