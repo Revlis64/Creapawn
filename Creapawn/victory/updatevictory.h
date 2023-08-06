@@ -78,7 +78,12 @@ void updateVictory()
             gameState = GameState::End;
           else if ((wildPawnBattle) && (pawn[3].energy == 0))
             gameState = GameState::Catch;
-            else gameState = GameState::Overworld;
+              else if (entityIdentity == Identity::Lair)
+              {
+                overworldState = OverworldState::Saved;
+                saveDestination = SaveDestination::World;
+                gameState = GameState::Save;
+              } else gameState = GameState::Overworld;
         }
       break;
     }

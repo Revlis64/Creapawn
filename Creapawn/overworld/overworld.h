@@ -1,6 +1,8 @@
 #pragma once
 const uint16_t divider = 800;
 const uint16_t halfDivider = 400;
+const uint8_t wildBattle = 1;
+const uint8_t castleBattle = 2;
 uint8_t menuCursor = 0;
 uint8_t speciesNumber[3];
 uint8_t level[3];

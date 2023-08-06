@@ -28,6 +28,21 @@ void determinePostsaveDestination()
 }
 
 
+uint8_t lookForReplacementPawn()
+{
+  Pawn selectedPawn;
+        
+  for (uint8_t index = 0; index < 32; ++index)
+  {
+    unpackPawn(selectedPawn, index);
+    if ((selectedPawn.zodiac != Zodiac::None) && (selectedPawn.energy > 0))
+      return index;
+  }
+
+  return invalidPawnIndex;
+
+}
+
 void saveGameData()
 {
   for (uint8_t index = 0; index < 3; ++index)
@@ -48,8 +63,7 @@ void saveGameData()
   EEPROM.update(address + 8, team[0]);
   EEPROM.update(address + 9, team[1]);
   EEPROM.update(address + 10, team[2]);
-  EEPROM.update(address + 11, newGamePlus);
-  
+  EEPROM.update(address + 11, newGamePlus);  EEPROM.update(address + 12, static_cast <uint8_t> (entitySpecies));
   determinePostsaveDestination();
 }
 
@@ -63,9 +77,11 @@ void loadGameData()
   entityX = EEPROM.read(address + 5);
   entityY = EEPROM.read(address + 6);
   herb = EEPROM.read(address + 7);
-  team[0] = EEPROM.read(address + 8);
+  team[0] = (EEPROM.read(address + 8) == invalidTeamSlot) ? lookForReplacementPawn() : EEPROM.read(address + 8);
   team[1] = EEPROM.read(address + 9);
   team[2] = EEPROM.read(address + 10);
+  entitySpecies = static_cast <Species> (EEPROM.read(address + 12));
+
   for (uint8_t index = 0; index < 3; ++index)
   {
     if (team[index] != invalidTeamSlot)
@@ -74,6 +90,7 @@ void loadGameData()
       createStats(pawn[index]);
     } else clearPawn(pawn[index]);
   }
+
   if ((travelDistance == 3200) && (newGamePlus))
   {
     presentEntity = false;
@@ -81,9 +98,6 @@ void loadGameData()
     travelDistance = 0;
     overworldCounter = 0;
   }
-    entitySpecies = (entityIdentity == Identity::Pawn) ? getSpecies(random(0, 32)) : Species::Voidismal;
 
-      //EEPROM.update(address + 12, static_cast <uint8_t> (entitySpecies));
-    //entitySpecies = static_cast <Species> (EEPROM.read(address + 12));
   gameState = GameState::Overworld;
 }

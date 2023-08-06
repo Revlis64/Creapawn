@@ -86,7 +86,7 @@ void printTeamSlots()
   {
     if ((index == 0) || ((index == 1) && (team[0] != invalidTeamSlot)) || ((index == 2) && (team[1] != invalidTeamSlot)))
     {
-      uint8_t boxBump = (optionSelection == index) ? 3 : 0;
+      uint8_t boxBump = (optionSelection == index) ? 0 : 3;
       drawTextBox(25 - boxBump, 43 + (7 * index), 26, 6, WHITE);
       tinyfont.print(F("SLOT"));
       switch (index)

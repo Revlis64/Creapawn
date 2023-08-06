@@ -376,8 +376,9 @@ void updateOverworld()
     {
       if ((arduboy.justPressed(B_BUTTON)) || (arduboy.justPressed(A_BUTTON)))
       {
-        healAllPawns();
-        overworldState = OverworldState::Walking;
+        healAllPawns();        overworldState = OverworldState::Saved;
+        saveDestination = SaveDestination::World;
+        gameState = GameState::Save;
       }
       break;
     }
