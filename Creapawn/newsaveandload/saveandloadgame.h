@@ -99,5 +99,7 @@ void loadGameData()
     overworldCounter = 0;
   }
 
+ //entitySpecies = (entityIdentity == Identity::Pawn) ? getSpecies(random(0, 32)) : Species::Voidismal;
+
   gameState = GameState::Overworld;
 }

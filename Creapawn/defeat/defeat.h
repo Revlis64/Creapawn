@@ -19,5 +19,7 @@ void updateDefeat()
         entityX = 15;
       }
     } else travelDistance = 0;
-    gameState = GameState::Overworld;
+    overworldState = OverworldState::Saved;
+    saveDestination = SaveDestination::World;
+    gameState = GameState::Save;
 }

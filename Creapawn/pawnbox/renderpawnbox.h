@@ -65,7 +65,7 @@ void printReleaseConfirmation()
       }
       case 1:
       {
-        tinyfont.print(F("(B)NO!"));
+        tinyfont.print(F("(B)NO"));
         break;
       }
       default:

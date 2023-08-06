@@ -39,12 +39,12 @@ void renderTitleScreen()
     }
     case TitleScreenState::ConfirmNewGame:
     {
-      drawTextBox(16, 0, 96, 6, WHITE);
-      tinyfont.print(F("ERASE CURRENT GAME?"));
-      drawTextBox(16, 8, 31, 6, WHITE);
+      drawTextBox(26, 0, 76, 6, WHITE);
+      tinyfont.print(F("OVERWRITE SAVE?"));
+      drawTextBox(26, 8, 31, 6, WHITE);
       tinyfont.print(F("(A)YES"));
-      drawTextBox(16, 16, 31, 6, WHITE);
-      tinyfont.print(F("(B)NO!"));
+      drawTextBox(26, 16, 31, 6, WHITE);
+      tinyfont.print(F("(B)NO"));
       break;
     }
   }
