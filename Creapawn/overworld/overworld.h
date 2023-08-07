@@ -25,6 +25,7 @@ uint8_t enemyTeamSize = 0;
 uint8_t herb = 0;
 bool wildPawnBattle = false;
 uint8_t encounterTransitionCounter = 0;
+Zodiac wildPawnZodiac = Zodiac::None;
 
 enum class SaveDestination : uint8_t
 {

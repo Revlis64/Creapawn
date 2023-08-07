@@ -21,14 +21,13 @@ void determineEntity()
     } else if ((landmarkDistance < 374) && (randomIndex > 9))
       {
          entityIdentity = static_cast <Identity> ((randomIndex / 3) - 1);
-         if ((entityIdentity == Identity::Herb) && (herb == 9))
-           entityIdentity = static_cast <Identity> (random(2, 4));
            
          switch (entityIdentity)
          {
             case Identity::Pawn:
             {
               entitySpecies = getSpecies(random(0, 32));
+              zodiacNumber[0] = random(1, 13);
               entityY = 25;
               break;
             }
@@ -47,8 +46,14 @@ void determineEntity()
             default:
               break;
          }
-         presentEntity = true;
-         entityX = 127;
+         
+         if ((entityIdentity == Identity::Herb) && (herb == 9))
+           entityIdentity = Identity::None;
+           else 
+             {
+               presentEntity = true;
+               entityX = 127;
+             }
       }
 }
 
@@ -279,7 +284,6 @@ void setupEnemyTeam()
     {
       enemyTeamSize = 0;
       speciesNumber[0] = static_cast <uint8_t> (entitySpecies);
-      zodiacNumber[0] = random(1, 13);
       level[0] = difficultyLevel;
 
       break;

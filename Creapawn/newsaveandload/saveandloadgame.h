@@ -64,6 +64,7 @@ void saveGameData()
   EEPROM.update(address + 9, team[1]);
   EEPROM.update(address + 10, team[2]);
   EEPROM.update(address + 11, newGamePlus);  EEPROM.update(address + 12, static_cast <uint8_t> (entitySpecies));
+  EEPROM.update(address + 13, zodiacNumber[0]);
   determinePostsaveDestination();
 }
 
@@ -81,6 +82,7 @@ void loadGameData()
   team[1] = EEPROM.read(address + 9);
   team[2] = EEPROM.read(address + 10);
   entitySpecies = static_cast <Species> (EEPROM.read(address + 12));
+  zodiacNumber[0] = EEPROM.read(address + 13);
 
   for (uint8_t index = 0; index < 3; ++index)
   {
