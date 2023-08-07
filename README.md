@@ -25,10 +25,18 @@ August 6th, 2023 Bug Fixes (1.0.5)
 
  - Bug Fix 2. Species of wild pawn will now be saved.
 
-August 6th, 2023 Changes (1.0.6) Game will save after player's defeat, when the player encounters an inn, and after the player defeats a lair.
+August 6th, 2023 Bug Fixes (1.0.6) Game will save after player's defeat, when the player encounters an inn, and after the player defeats a lair.
 
 August 7th, 2023 Bug Fixes (1.0.7) 
 
  - Bug Fix 1. Player can no long phase through interactable elements when saving or going to storage box menu while in close proximity to them.
 
  - Bug Fix 2. Small visual touch ups and text changes.
+   
+August 7th, 2023 Bug Fixes (1.0.8)
+
+  - Bug Fix 1. Having a max amount of herbs will no longer cause more enemies and wild pawns to spawn.
+
+  - Bug fix 2. Zodiac of wild pawn will now be saved.
+
+  - Bug Fix 3. Small visual touch ups and text changes.
