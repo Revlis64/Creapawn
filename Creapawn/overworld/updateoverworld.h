@@ -325,18 +325,17 @@ void updateOverworld()
   {
     case OverworldState::Walking:
     {
-      updateWalking();
       if (arduboy.justPressed(A_BUTTON))
       {
         saveDestination = SaveDestination::PawnBox;
         gameState = GameState::Save;
-      }
-      if (arduboy.justPressed(B_BUTTON))
-      {
-        overworldState = OverworldState::Saved;
-        saveDestination = SaveDestination::World;
-        gameState = GameState::Save;
-      }
+      } else if (arduboy.justPressed(B_BUTTON))
+        {
+          overworldState = OverworldState::Saved;
+          saveDestination = SaveDestination::World;
+          gameState = GameState::Save;
+        } else updateWalking();
+
       break;
     }
 
