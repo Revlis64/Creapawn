@@ -22,11 +22,13 @@ June 29th, 2023 Bug Fixes (1.0.4):
 August 6th, 2023 Bug Fixes (1.0.5)
 
  - Bug Fix 1. If player loads a game without any pawns in their team, a pawn from the closest slot, with at least one energy, will be selected for the first team slot.
-   
- - Bug Fix 2. 
 
- - Bug Fix 3. Species of wild pawn will now be saved.
+ - Bug Fix 2. Species of wild pawn will now be saved.
 
 August 6th, 2023 Changes (1.0.6) Game will save after player's defeat, when the player encounters an inn, and after the player defeats a lair.
 
-August 7th, 2023 Bug Fixes (1.0.7) Player can no long phase through interactable elements when saving or going to storage box menu while in close proximity to them.
+August 7th, 2023 Bug Fixes (1.0.7) 
+
+ - Bug Fix 1. Player can no long phase through interactable elements when saving or going to storage box menu while in close proximity to them.
+
+ - Bug Fix 2. Small visual touch ups and text changes.
