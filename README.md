@@ -19,3 +19,14 @@ June 29th, 2023 Bug Fixes (1.0.4):
 
  - Bug Fix 3. Player can no longer scroll down below the active pawns on their team during a battle if the player went on the pawn storage screen after pawn #3 was defeated on the previous save.
 
+August 6th, 2023 Bug Fixes (1.0.5)
+
+ - Bug Fix 1. If player loads a game without any pawns in their team, a pawn from the closest slot, with at least one energy, will be selected for the first team slot.
+   
+ - Bug Fix 2. 
+
+ - Bug Fix 3. Species of wild pawn will now be saved.
+
+August 6th, 2023 Changes (1.0.6) Game will save after player's defeat, when the player encounters an inn, and after the player defeats a lair.
+
+August 7th, 2023 Bug Fixes (1.0.7) Player can no long phase through interactable elements when saving or going to storage box menu while in close proximity to them.
