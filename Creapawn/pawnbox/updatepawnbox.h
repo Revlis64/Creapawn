@@ -114,7 +114,9 @@ void saveTeamPositions()
 {
   uint16_t address = 704;
   for(uint8_t index = 0; index < 3; ++index)
-    EEPROM.update(address + index, team[index]);
+    EEPROM.update((
+
+address + index), team[index]);
 }
 
 
@@ -195,7 +197,7 @@ void updatePawnBox()
       selectOptionsAction(downLimit);
       if (arduboy.justPressed(A_BUTTON))
       {
-        if (unpackedPawn.energy > 0)
+        if ((unpackedPawn.energy > 0) && ((team[optionSelection] == invalidTeamSlot) || (team[optionSelection] == boxIndex)))
         {
           arrangeTeam(optionSelection, boxIndex);
           saveTeamPositions();
