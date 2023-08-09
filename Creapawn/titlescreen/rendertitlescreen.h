@@ -39,12 +39,12 @@ void renderTitleScreen()
     }
     case TitleScreenState::ConfirmNewGame:
     {
-      drawTextBox(26, 0, 76, 6, WHITE);
-      tinyfont.print(F("START NEW GAME?"));
-      drawTextBox(26, 8, 31, 6, WHITE);
+      drawTextBox(43, 0, 41, 6, WHITE);
+      tinyfont.print(F("RESTART?"));
+      drawTextBox(43, 8, 31, 6, WHITE);
       tinyfont.print(F("(A)YES"));
-      drawTextBox(26, 16, 31, 6, WHITE);
-      tinyfont.print(F("(B)NO!"));
+      drawTextBox(43, 16, 31, 6, WHITE);
+      tinyfont.print(F("(B)NO"));
       break;
     }
   }

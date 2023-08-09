@@ -1,5 +1,13 @@
 #pragma once
 
+bool checkTeam(uint8_t boxIndex, uint8_t slotIndex)
+{
+    if (team[slotIndex] == boxIndex)
+      return true;
+
+  return false;
+}
+
 void moveBoxCursor()
 {
   const uint8_t maxCursorUp = 0;
@@ -114,9 +122,7 @@ void saveTeamPositions()
 {
   uint16_t address = 704;
   for(uint8_t index = 0; index < 3; ++index)
-    EEPROM.update((
-
-address + index), team[index]);
+    EEPROM.update(address + index, team[index]);
 }
 
 
@@ -187,6 +193,8 @@ void updatePawnBox()
     case BoxState::ConfigureTeam:
     {
       uint8_t downLimit = 0;
+      bool teamPresence = false;
+
       for (uint8_t index = 0; index < 2; ++index)
       {
         if (team[index] != invalidTeamSlot)
@@ -194,10 +202,17 @@ void updatePawnBox()
           else break;
       }
 
+      for (uint8_t slotIndex = 0; slotIndex < 3; ++slotIndex)
+        if (checkTeam(boxIndex, slotIndex))
+          {
+            teamPresence = true;
+            break;
+          }
+
       selectOptionsAction(downLimit);
       if (arduboy.justPressed(A_BUTTON))
       {
-        if ((unpackedPawn.energy > 0) && ((team[optionSelection] == invalidTeamSlot) || (team[optionSelection] == boxIndex)))
+        if ((unpackedPawn.energy > 0) && (((teamPresence) && (team[optionSelection] == boxIndex)) || (!teamPresence)))
         {
           arrangeTeam(optionSelection, boxIndex);
           saveTeamPositions();

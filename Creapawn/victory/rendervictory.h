@@ -35,7 +35,7 @@ void renderVictory()
           case 1:
           {
             if (levelUpConfirm[index])
-              tinyfont.print(" LEVELED UP!");
+              tinyfont.print(" LV UP!");
           }
         }
     }

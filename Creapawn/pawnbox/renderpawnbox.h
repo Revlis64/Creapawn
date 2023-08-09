@@ -1,18 +1,5 @@
 #pragma once
 
-bool checkTeam(uint8_t boxIndex, uint8_t & teamNumber)
-{
-  for (uint8_t index = 0; index < 3; ++index)
-    if (team[index] == boxIndex)
-    {
-      teamNumber = index;
-      return true;
-    }
-
-  return false;
-}
-
-
 
 void printMainOptions()
 {
@@ -65,7 +52,7 @@ void printReleaseConfirmation()
       }
       case 1:
       {
-        tinyfont.print(F("(B)NO!"));
+        tinyfont.print(F("(B)NO"));
         break;
       }
       default:
@@ -133,10 +120,19 @@ void renderPawnBox()
        if (displayedPawn.zodiac != Zodiac::None)
          drawPawn(displayedPawn.species, 54 + (19 * row), 5 + (19 * column), BLACK, Direction::Right);
        uint8_t teamNumber = 0;
-       if (checkTeam(boxIndex, teamNumber))
+       bool teamPresence = false;
+             for (uint8_t slotIndex = 0; slotIndex < 3; ++slotIndex)
+        if (checkTeam(boxIndex, slotIndex))
+          {
+            teamPresence = true;
+            teamNumber = slotIndex + 1;
+            break;
+          }
+
+       if (teamPresence)
        {
          drawTextBox(65 + (19 * row), 16 + (19 * column), 6, 6, WHITE);
-         tinyfont.print(teamNumber + 1);
+         tinyfont.print(teamNumber);
        }
 
        if (cursorIndex == boxIndex)
@@ -175,7 +171,7 @@ void renderPawnBox()
     case BoxState::CannotDoAction:
     {
         drawTextBox(0, 43, 51, 16, WHITE);
-        tinyfont.print(F("YOU CANNOT"));
+        tinyfont.print(F("YOU CAN'T"));
         tinyfont.setCursor(1, 49);
         tinyfont.print(F("DO THIS"));
         tinyfont.setCursor(1, 54);
@@ -186,7 +182,7 @@ void renderPawnBox()
     case BoxState::NeedTeam:
     {
         drawTextBox(0, 43, 51, 16, WHITE);
-        tinyfont.print(F("YOU CANNOT"));
+        tinyfont.print(F("YOU CAN'T"));
         tinyfont.setCursor(1, 49);
         tinyfont.print(F("LEAVE WITH"));
         tinyfont.setCursor(1, 54);
