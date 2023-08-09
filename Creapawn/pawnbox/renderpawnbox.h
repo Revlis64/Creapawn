@@ -171,18 +171,18 @@ void renderPawnBox()
     case BoxState::CannotDoAction:
     {
         drawTextBox(0, 43, 51, 16, WHITE);
-        tinyfont.print(F("YOU CAN'T"));
+        tinyfont.print(F("ACTION"));
         tinyfont.setCursor(1, 49);
-        tinyfont.print(F("DO THIS"));
+        tinyfont.print(F("CAN'T BE"));
         tinyfont.setCursor(1, 54);
-        tinyfont.print(F("ACTION!"));
+        tinyfont.print(F("DONE!"));
         break;
     }
 
     case BoxState::NeedTeam:
     {
         drawTextBox(0, 43, 51, 16, WHITE);
-        tinyfont.print(F("YOU CAN'T"));
+        tinyfont.print(F("CAN'T"));
         tinyfont.setCursor(1, 49);
         tinyfont.print(F("LEAVE WITH"));
         tinyfont.setCursor(1, 54);

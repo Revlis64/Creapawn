@@ -81,7 +81,39 @@ void shiftTeam()
 
 void arrangeTeam(uint8_t slot, uint8_t boxIndex)
 {
-  team[slot] = (team[slot] != boxIndex) ? boxIndex : invalidTeamSlot;
+  const uint8_t invalidSlotNo = 3;
+  bool teamPresence = false;
+  uint8_t boxIndexHolder = invalidTeamSlot;
+  uint8_t teamSlotHolder = invalidSlotNo;
+
+  for (uint8_t index = 0; index < 3; ++index)
+    if (checkTeam(boxIndex, index))
+      {
+        teamSlotHolder = index;
+        teamPresence = true;
+        break;
+      }
+
+   switch (teamPresence)
+   {
+     case true:
+     {
+       if (team[slot] == boxIndex)
+         team[slot] = invalidTeamSlot;
+         else
+         {
+           boxIndexHolder = team[slot];
+           team[slot] = boxIndex;
+           team[teamSlotHolder] = boxIndexHolder;
+         }
+      break;
+     }
+     case false:
+     {
+       team[slot] = boxIndex;
+       break;
+     }
+    }
   shiftTeam();
 }
 
@@ -193,7 +225,6 @@ void updatePawnBox()
     case BoxState::ConfigureTeam:
     {
       uint8_t downLimit = 0;
-      bool teamPresence = false;
 
       for (uint8_t index = 0; index < 2; ++index)
       {
@@ -202,17 +233,11 @@ void updatePawnBox()
           else break;
       }
 
-      for (uint8_t slotIndex = 0; slotIndex < 3; ++slotIndex)
-        if (checkTeam(boxIndex, slotIndex))
-          {
-            teamPresence = true;
-            break;
-          }
 
       selectOptionsAction(downLimit);
       if (arduboy.justPressed(A_BUTTON))
       {
-        if ((unpackedPawn.energy > 0) && (((teamPresence) && (team[optionSelection] == boxIndex)) || (!teamPresence)))
+        if (unpackedPawn.energy > 0)
         {
           arrangeTeam(optionSelection, boxIndex);
           saveTeamPositions();
