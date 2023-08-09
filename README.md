@@ -41,4 +41,8 @@ August 7th, 2023 Bug Fixes and Changes (1.0.8):
 
   - Bug Fix/Change 3. Small visual touch ups and text changes.
 
-August 8th, 2023 Bug Fixes and Changes (1.0.9): Changes to team selection option within pawn storage box.
+August 8th, 2023 Bug Fixes and Changes (1.0.9): 
+
+  - Bug Fix/Change 1. Changes to team selection option within pawn storage box.
+
+  - Bug Fix/Change 2. Small visual touch ups and text changes.
