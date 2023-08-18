@@ -49,9 +49,9 @@ August 8th, 2023 Bug Fixes and Changes (1.0.9):
 
 August 18th, 2023 Bug Fixes and Changes (1.0.10)
 
-  _ Bug Fix/Change 1. During battle, starting AP (action points) has been increased to six.
+  - Bug Fix/Change 1. During battle, starting AP (action points) has been increased to six.
 
-  _ Bug Fix/Change 2. The amount of AP (action points) replenished at the beginning of each turn has been reduced to three. 
+  - Bug Fix/Change 2. The amount of AP (action points) replenished at the beginning of each turn has been reduced to three. 
 
   - Bug Fix/Change 3. Changes to equation that determines a pawn's action cost.
   
