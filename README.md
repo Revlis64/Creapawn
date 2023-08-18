@@ -63,4 +63,4 @@ August 18th, 2023 Bug Fixes and Changes (1.0.10)
 
   - Bug Fix/Change 7. Heal All will now heal all the player's pawns for full energy.
 
-  - Bug Fix/Change 8. to the computer opponent's actions in battle.
+  - Bug Fix/Change 8. Changes to the computer's actions in battle.
