@@ -16,8 +16,8 @@ void setupBattle()
 {
   turn = Turn::Player;
   firstTurn = true;
-  actionPoints[0] = 5;
-  actionPoints[1] = 5;
+  actionPoints[0] = 6;
+  actionPoints[1] = 6;
   gameState = GameState::Battle;
   selectedPawn = findSelectedPawn();
   selectedAction = 0;
@@ -25,5 +25,5 @@ void setupBattle()
   skipCounter = 0;
   computerActionTaken = false;
   computerActionCounter = 0;
-  enduredPawn = 6;
+  endure = false;
 }

@@ -46,7 +46,6 @@ void printReleaseConfirmation()
     {
       case 0:
       {
-        //if (boxIndex == checkTeam())
         tinyfont.print(F("(A)YES"));
         break;
       }
@@ -64,39 +63,16 @@ void printReleaseConfirmation()
 void printTeamSlots()
 {
 
-  drawTextBox(0, 43, 21, 11, WHITE);
-  tinyfont.print(F("PICK"));
-  tinyfont.setCursor(1, 49);
-  tinyfont.print(F("SLOT"));
+  uint8_t slotLimit = determineSlotLimit();
 
-  for(uint8_t index = 0; index < 3; ++index)
+  drawTextBox(0, 43, 21, 6, WHITE);
+  tinyfont.print(F("PICK"));
+  for(uint8_t index = 0; index < (slotLimit + 1); ++index)
   {
-    if ((index == 0) || ((index == 1) && (team[0] != invalidTeamSlot)) || ((index == 2) && (team[1] != invalidTeamSlot)))
-    {
-      uint8_t boxBump = (optionSelection == index) ? 0 : 3;
-      drawTextBox(25 - boxBump, 43 + (7 * index), 26, 6, WHITE);
-      tinyfont.print(F("SLOT"));
-      switch (index)
-      {
-        case 0:
-        {
-          tinyfont.print(F("1"));
-          break;
-        }
-        case 1:
-        {
-          tinyfont.print(F("2"));
-          break;
-        }
-        case 2:
-        {
-          tinyfont.print(F("3"));
-          break;
-        }
-        default:
-          break;
-      }
-    }
+    uint8_t boxBump = (optionSelection == index) ? 0 : 3;
+    drawTextBox(25 - boxBump, 43 + (7 * index), 26, 6, WHITE);
+    tinyfont.print(F("SLOT"));
+    tinyfont.print(index + 1);
   }
 }
 
@@ -169,26 +145,19 @@ void renderPawnBox()
     }
 
     case BoxState::CannotDoAction:
+    case BoxState::NeedTeam:
     {
-        drawTextBox(0, 43, 51, 16, WHITE);
-        tinyfont.print(F("ACTION"));
-        tinyfont.setCursor(1, 49);
-        tinyfont.print(F("CAN'T BE"));
-        tinyfont.setCursor(1, 54);
-        tinyfont.print(F("DONE!"));
+        drawTextBox(3, 43, 46, 11, WHITE);
+        if (boxState == BoxState::CannotDoAction)
+          tinyfont.print(F("UNABLE TO"));
+          else tinyfont.print(F("YOU HAVE"));
+        tinyfont.setCursor(4, 49);
+        if (boxState == BoxState::CannotDoAction)
+          tinyfont.print(F("DO ACTION"));
+          else tinyfont.print(F("NO TEAM"));
         break;
     }
 
-    case BoxState::NeedTeam:
-    {
-        drawTextBox(0, 43, 51, 16, WHITE);
-        tinyfont.print(F("CAN'T"));
-        tinyfont.setCursor(1, 49);
-        tinyfont.print(F("LEAVE WITH"));
-        tinyfont.setCursor(1, 54);
-        tinyfont.print(F("OUT PAWNS!"));
-        break;
-    }
   }
 
 }

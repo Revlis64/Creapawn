@@ -21,8 +21,8 @@ enum class AttackTarget : uint8_t
   ClosePawn,
   AnyEnemy,
   AllEnemies,
-  AllAllies,
-  Self,
+  HealAllies,
+  ProtectAllies,
   None,
 };
 
@@ -56,7 +56,7 @@ uint8_t selectedPawnX = 0;
 uint8_t selectedPawnY = 0;
 uint8_t selectedAction = 0;
 uint8_t attackCost = 0;
-uint8_t enduredPawn = invalidPawnIndex;
+uint8_t endure = false;
 bool typeDamageMultiplier = 1;
 bool typeDamageDivider = 1;
 uint8_t damage = 0;

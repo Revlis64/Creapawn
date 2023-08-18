@@ -1,6 +1,5 @@
 #pragma once
 
-
 struct Context
 {
   uint8_t potentialPriority = 0;
@@ -8,6 +7,20 @@ struct Context
   uint8_t potentialSelectedSquareX = 0;
   uint8_t potentialSelectedSquareY = 0;
 };
+
+bool checkForAllies(uint8_t nonTargetPawn)
+{
+
+  const bool noAllies = 1;
+  const bool allies = 0;
+
+  for (uint8_t squareX = 2; squareX < 4; ++squareX)
+    for (uint8_t squareY = 0; squareY < 4; ++squareY)
+      if ((board[squareY][squareX] >= enemyPawnStart) && (board[squareY][squareX] <= enemyPawnEnd) && (board[squareY][squareX] != nonTargetPawn))
+        return allies;
+
+  return noAllies;
+}
 
 bool analyseFirstColumn(uint8_t y)
 {
@@ -36,14 +49,36 @@ uint8_t findPlayerPawn()
 
 
 
-void analyseBottomLeft(uint8_t x, uint8_t y, Context & context)
+void analyseUpperOrLowerLeft(uint8_t x, uint8_t y, uint8_t nonTarget, bool upMove, Context & context)
 {
-  uint8_t prePotentialPriority = (board[y][3] == blankTile) ? 1 : 0;
 
-  if (board[y][x] <= playerPawnEnd)
-    prePotentialPriority += 2;
+  const bool noAllies = 1;
+  uint8_t prePotentialPriority = 3;
 
-  if (((board[y][x] <= playerPawnEnd) || (analyseFirstColumn(y))) && (context.potentialPriority < prePotentialPriority))
+  switch (upMove)
+  {
+    default:
+    {
+      if (board[y + 1][x] <= playerPawnEnd)
+        prePotentialPriority -= 1;
+      break;
+    }
+    case false:
+    { 
+      if (board[y - 1][x] <= playerPawnEnd)
+        prePotentialPriority -= 1;
+      break;
+    }
+  }
+
+  if (((x < 2) && ((board[y][3] != blankTile) || (checkForAllies(nonTarget) == noAllies))) || (board[y][x] == blankTile))
+    prePotentialPriority -= 1;
+
+  if ((checkForAllies(nonTarget) == noAllies) && (upMove))
+    prePotentialPriority -= 1;
+
+
+  if (((board[y][x] <= playerPawnEnd) || (analyseFirstColumn(y))) && (board[y][x + 1] == blankTile) && (context.potentialPriority < prePotentialPriority))
   {
     context.potentialPriority = prePotentialPriority;
     context.potentialComputerAction = ComputerAction::Move;
@@ -54,10 +89,13 @@ void analyseBottomLeft(uint8_t x, uint8_t y, Context & context)
 
 
 
-void analyseMidLeft(uint8_t x, uint8_t y, Context & context)
+void analyseMidLeft(uint8_t x, uint8_t y, Context & context)
 {
+  const bool allies = 0;
+
   uint8_t priorPotentialPriority = context.potentialPriority;
   uint8_t tileIndex = board[y][x];
+  uint8_t prePotentialPriority = 2;
 
   switch (tileIndex)
   {
@@ -65,12 +103,13 @@ void analyseMidLeft(uint8_t x, uint8_t y, Context & context)
     case 1:
     case 2:
     {
-      uint8_t prePotentialPriority = 2;
+      
+      if ((checkForAllies(board[y][x + 1]) == allies) && (board[y][3] != blankTile))        prePotentialPriority -= 1;
 
-      if (board[y][3] == blankTile)
-        prePotentialPriority = 3;
+      if ((x == 2) || (board[y][3] == blankTile))
+        prePotentialPriority += 1;
 
-      if ((context.potentialPriority < prePotentialPriority) && (tileIndex != enduredPawn))
+      if ((context.potentialPriority < prePotentialPriority) && (!endure))
       {
         context.potentialPriority = prePotentialPriority;
         context.potentialComputerAction = ComputerAction::Attack;
@@ -80,9 +119,12 @@ void analyseMidLeft(uint8_t x, uint8_t y, Context & context)
 
     case blankTile:
     {
-      if (context.potentialPriority < 2)
+      if ((x < 2) && (checkForAllies(board[y][x + 1]) == allies))       
+        prePotentialPriority -= 1;
+
+      if (context.potentialPriority < prePotentialPriority)
       {
-        context.potentialPriority = 2;
+        context.potentialPriority = prePotentialPriority;
         context.potentialComputerAction = ComputerAction::Move;
       }
       break;
@@ -100,28 +142,7 @@ void analyseMidLeft(uint8_t x, uint8_t y, Context & context)
 }
 
 
-
-void analyseTopLeft(uint8_t x, uint8_t y, Context & context)
-{
-  uint8_t prePotentialPriority = (board[y][3] == blankTile) ? 2 : 0;
-
-  if ((board[y][x] <= playerPawnEnd) && ((x + 1) == 3))
-    prePotentialPriority += 2;
-    else if (board[y][x] <= playerPawnEnd)
-      prePotentialPriority += 1;
-
-  if (((board[y][x] <= playerPawnEnd) || (analyseFirstColumn(y))) && (context.potentialPriority < prePotentialPriority))
-  {
-    context.potentialPriority = prePotentialPriority;
-    context.potentialComputerAction = ComputerAction::Move;
-    context.potentialSelectedSquareX = x + 1;
-    context.potentialSelectedSquareY = y;
-  }
-}
-
-
-
-void analyseAbove(uint8_t x, uint8_t y, Context & context)
+void analyseAboveOrBelow(uint8_t x, uint8_t y, Context & context)
 {
   uint8_t pawnIndex = board[y][x];
 
@@ -131,73 +152,18 @@ void analyseAbove(uint8_t x, uint8_t y, Context & context)
     case 1:
     case 2:
     {
-      if ((context.potentialPriority < 4) && (pawnIndex != enduredPawn))
+      if ((context.potentialPriority < 3) && (!endure))
       {
-        context.potentialPriority = 4;
+        context.potentialPriority = 3;
         context.potentialComputerAction = ComputerAction::Attack;
         context.potentialSelectedSquareX = x;
         context.potentialSelectedSquareY = y;
-      }
-      break;
-    }
-
-    case 3:
-    case 4:
-    case 5:
-    {
-      if (context.potentialSelectedSquareY == (y))
-      {
-        context.potentialPriority = 0;
-        context.potentialComputerAction = ComputerAction::None;
-        context.potentialSelectedSquareX = x; 
-        context.potentialSelectedSquareY = y + 1;
       }
       break;
     }
 
     default:
      break;
-  }
-}
-
-
-
-void analyseBelow(uint8_t x, uint8_t y, Context & context)
-{
-  uint8_t pawnIndex = board[y][x];
-
-  switch (pawnIndex)
-  {
-    case 0:
-    case 1:
-    case 2:
-    {
-      if ((context.potentialPriority < 4) && (pawnIndex != enduredPawn))
-      {
-        context.potentialPriority = 4;
-        context.potentialComputerAction = ComputerAction::Attack;
-        context.potentialSelectedSquareX = x;
-        context.potentialSelectedSquareY = y;
-      }
-      break;
-    }
-
-    case 3:
-    case 4:
-    case 5:
-    {
-      if (context.potentialSelectedSquareY == y)
-      {
-        context.potentialPriority = 0;
-        context.potentialComputerAction = ComputerAction::None;
-        context.potentialSelectedSquareX = x;
-        context.potentialSelectedSquareY = y - 1;
-      }
-      break;
-    }
-
-    default:
-      break;
   }
 }
 
@@ -212,7 +178,7 @@ void determineComputerOffensive(uint8_t x, uint8_t y, Context & context)
     case 1:
     case 2:
     {
-      if ((context.potentialPriority < 2) && (board[y][x - 1] != enduredPawn))
+      if ((context.potentialPriority < 2) && (!endure))
       {
         context.potentialPriority = 2;
         context.potentialComputerAction = ComputerAction::Attack;
@@ -221,9 +187,9 @@ void determineComputerOffensive(uint8_t x, uint8_t y, Context & context)
     }
     case blankTile:
     {
-      if (context.potentialPriority < 5)
+      if (context.potentialPriority < 4)
       {
-        context.potentialPriority = 5;
+        context.potentialPriority = 4;
         context.potentialComputerAction = ComputerAction::Move;
       }
       break;
@@ -243,6 +209,7 @@ void determineComputerOffensive(uint8_t x, uint8_t y, Context & context)
 
 void computerPass()
 {
+  const uint8_t player = 0;
   const uint8_t move = 0;
   if (computerActionTaken == false)
     ++skipCounter;
@@ -255,8 +222,8 @@ void computerPass()
     selectedAction = move;
     turn = Turn::Player;
     battleAction = BattleAction::PawnAndAction;
-    actionPoints[0] = ((actionPoints[0] + 5) > 9) ? 9 : (actionPoints[0] + 5);
-    enduredPawn = invalidPawnIndex;
+    replenishActionPoints(player);
+    endure = false;
   }
 }
 
@@ -286,14 +253,14 @@ void updateComputerBattleAction()
               case 3:
               {
                 if (y > 0)
-                  analyseTopLeft((x - 1), (y - 1), context);
+                  analyseUpperOrLowerLeft((x - 1), (y - 1), board[y][x], true, context); //UP
                 analyseMidLeft((x - 1), y, context);
                 if (y < 3)
-                  analyseBottomLeft((x -1), (y + 1), context);
+                  analyseUpperOrLowerLeft((x - 1), (y + 1), board[y][x], false, context); //DOWN
                 if (y > 0)
-                  analyseAbove(x, (y - 1), context);
+                  analyseAboveOrBelow(x, (y - 1), context); //ABOVE
                 if (y < 3)
-                  analyseBelow(x, (y + 1), context);
+                  analyseAboveOrBelow(x, (y + 1), context); //BELOW
                 break;
               }
               

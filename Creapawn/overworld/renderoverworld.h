@@ -122,9 +122,9 @@ void renderOverworld()
   {
     case OverworldState::Saved:
     {
-      drawTextBox(50, 14, 28, 8, BLACK);
-      drawTextBox(51, 15, 26, 6, WHITE);
-      tinyfont.print(F("SAVED"));
+      drawTextBox(37, 14, 53, 8, BLACK);
+      drawTextBox(38, 15, 51, 6, WHITE);
+      tinyfont.print(F("GAME SAVED"));
       break;
     }
     case OverworldState::Herb:
@@ -136,11 +136,9 @@ void renderOverworld()
     }
     case OverworldState::Inn:
     {
-      drawTextBox(37, 14, 53, 13, BLACK);
-      drawTextBox(38, 15, 51, 11, WHITE);
-      tinyfont.print(F("YOUR PAWNS"));
-      tinyfont.setCursor(39, 21);
-      tinyfont.print(F("ARE HEALED"));
+      drawTextBox(10, 14, 108, 8, BLACK);
+      drawTextBox(11, 15, 106, 6, WHITE);
+      tinyfont.print(F("YOUR PAWNS ARE HEALED"));
       break;
     }
     case OverworldState::Encounter:

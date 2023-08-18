@@ -117,7 +117,7 @@ void deployAttack(SpecialAttack specialAttack)
     //Makes the attacking pawn invulnerable to attack.
     case SpecialAttack::Endure:
     {
-      enduredPawn = selectedPawn;
+      endure = true;
       battleAction = BattleAction::PawnAndAction;
       break;
     }
@@ -172,7 +172,7 @@ void deployAttack(SpecialAttack specialAttack)
     {
       for (uint8_t pawnIndex = 0; pawnIndex < 3; ++pawnIndex)
         if (pawn[pawnIndex].energy > 0) 
-          pawn[pawnIndex].energy = ((pawn[pawnIndex].energy + (pawn[pawnIndex].maxEnergy / 2)) > pawn[pawnIndex].maxEnergy) ? pawn[pawnIndex].maxEnergy : (pawn[pawnIndex].energy + (pawn[pawnIndex].maxEnergy / 2)); 
+          pawn[pawnIndex].energy = pawn[pawnIndex].maxEnergy;
       battleAction = BattleAction::PawnAndAction;
       break;
     }

@@ -1,11 +1,32 @@
 #pragma once
 
-bool checkTeam(uint8_t boxIndex, uint8_t slotIndex)
+bool checkTeam(uint8_t boxIndex, uint8_t slot)
 {
-    if (team[slotIndex] == boxIndex)
+    if (team[slot] == boxIndex)
       return true;
 
   return false;
+}
+
+uint8_t determineSlotLimit()
+{
+  uint8_t slotLimit = 2;
+  bool teamPresence = false;
+      
+  for (uint8_t index = 2; index > 0; --index)    if (checkTeam(invalidTeamSlot, index))
+      slotLimit -= 1;
+
+  for (uint8_t index = 0; index < 3; ++index)
+    if (checkTeam(boxIndex, index))
+    {
+      teamPresence = true;
+      break;
+    }
+        
+  if ((slotLimit < 2) && (!teamPresence) && (team[0] != invalidTeamSlot))
+    slotLimit += 1;
+
+  return slotLimit;
 }
 
 void moveBoxCursor()
@@ -224,17 +245,9 @@ void updatePawnBox()
 
     case BoxState::ConfigureTeam:
     {
-      uint8_t downLimit = 0;
+      uint8_t slotLimit = determineSlotLimit();
 
-      for (uint8_t index = 0; index < 2; ++index)
-      {
-        if (team[index] != invalidTeamSlot)
-          downLimit += 1;
-          else break;
-      }
-
-
-      selectOptionsAction(downLimit);
+      selectOptionsAction(slotLimit);
       if (arduboy.justPressed(A_BUTTON))
       {
         if (unpackedPawn.energy > 0)

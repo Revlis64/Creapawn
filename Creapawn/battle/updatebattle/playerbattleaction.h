@@ -1,5 +1,14 @@
 #pragma once
 
+void replenishActionPoints(uint8_t index)
+{
+
+   actionPoints[index] = ((actionPoints[index] + 3) > 9) ? 9 : (actionPoints[index] + 3);
+
+}
+
+
+
 uint8_t findComputerPawn()
 {
   for (uint8_t pawnPreselect = 3; pawnPreselect < 6; ++pawnPreselect)
@@ -28,14 +37,18 @@ AttackTarget determineAttackTarget()
        case SpecialAttack::Strike:
        case SpecialAttack::Hit:
          return AttackTarget::CloseEnemy;
+
        case SpecialAttack::Blast:
          return AttackTarget::AnyEnemy;
+       case SpecialAttack::Endure:
+         return AttackTarget::ProtectAllies;
+
        case SpecialAttack::HealAll:
-         return AttackTarget::AllAllies;
+         return AttackTarget::HealAllies;
+
        case SpecialAttack::Shockwave:
          return AttackTarget::AllEnemies;
-       case SpecialAttack::Endure:
-         return AttackTarget::Self;
+
        case SpecialAttack::Swap:
          return AttackTarget::ClosePawn;
       }
@@ -225,14 +238,15 @@ void selectAndConfirmTarget(SpecialAttack specialAttack)
 
     case end:
     {
+      const uint8_t enemy = 1;
       previouslySelectedPawn = selectedPawn;
       selectedPawn = findComputerPawn();
       selectedAction = none;
       turn = Turn::Opponent;
       battleAction = BattleAction::PawnAndAction;
       if (firstTurn == false)
-        actionPoints[1] = ((actionPoints[1] + 5) > 9) ? 9 : (actionPoints[1] + 5);
-        else firstTurn = false;
+         replenishActionPoints(enemy);
+         else firstTurn = false;
       break; 
     } 
   }

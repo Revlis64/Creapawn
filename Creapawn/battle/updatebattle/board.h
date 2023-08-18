@@ -28,7 +28,7 @@ void reduceEnergyAndDamage(uint8_t x, uint8_t y, bool & pawnsWithoutDamage, Pawn
     board[y][x] = blankTile;
   if (board[y][x] < blankTile)
     {
-      if (enduredPawn == board[y][x])
+      if (endure)
         pawn.damage = 0;
 
       if (pawn.damage == 0)
@@ -130,11 +130,11 @@ void determineBoardTarget(uint8_t x, uint8_t y, uint8_t & tileIndex, Pawn & affe
         break;
       }
 
-      case AttackTarget::AllAllies:
+      case AttackTarget::HealAllies:
       {
-        if ((tileIndex < enemyPawnStart) && (affectedPawn.energy < affectedPawn.maxEnergy))
+        if ((tileIndex <= playerPawnEnd) && (affectedPawn.energy < affectedPawn.maxEnergy))
         {
-          affectedPawn.energyPrint = ((affectedPawn.energy + (affectedPawn.maxEnergy / 2)) > affectedPawn.maxEnergy) ? affectedPawn.maxEnergy : affectedPawn.energy + (affectedPawn.maxEnergy / 2);
+          affectedPawn.energyPrint = affectedPawn.maxEnergy;
           if (arduboy.everyXFrames(5))
             affectedPawn.draw = (affectedPawn.draw) ? false : true;
         } else if (tileIndex < blankTile)
@@ -142,9 +142,9 @@ void determineBoardTarget(uint8_t x, uint8_t y, uint8_t & tileIndex, Pawn & affe
         break;
       }
 
-      case AttackTarget::Self:
+      case AttackTarget::ProtectAllies:
       {
-        if (tileIndex == selectedPawn)
+        if (tileIndex <= playerPawnEnd)
         {
           if (arduboy.everyXFrames(5))
             affectedPawn.draw = (affectedPawn.draw) ? false : true;

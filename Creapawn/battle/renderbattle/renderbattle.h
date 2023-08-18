@@ -40,12 +40,12 @@ void drawNameBoxes()
                 break;
               }
 
-              case AttackTarget::Self:
+              case AttackTarget::ProtectAllies:
               case AttackTarget::CloseEmptyTiles:
               case AttackTarget::ClosePawn:
                 break;
 
-              case AttackTarget::AllAllies:
+              case AttackTarget::HealAllies:
               {
                 energyDrawIndex = ((pawn[nameBoxCounter].energy == pawn[nameBoxCounter].maxEnergy) || (pawn[nameBoxCounter].energy == 0)) ? true : pawn[nameBoxCounter].draw;
                 break;
@@ -66,11 +66,11 @@ void drawNameBoxes()
             break;
         }
 
-        if ((energyDrawIndex == true) && (enduredPawn != nameBoxCounter))
+        if ((energyDrawIndex == true) && ((nameBoxCounter >= enemyPawnStart) || (!endure)))
         { 
           determineZeroPrint(pawn[nameBoxCounter].energyPrint);
           tinyfont.print(pawn[nameBoxCounter].energyPrint);
-        } else if (enduredPawn == nameBoxCounter)
+        } else if ((endure) && (nameBoxCounter <= playerPawnEnd))
           tinyfont.print("Ti");
 
         ++nameBoxOrganizer;
@@ -183,9 +183,10 @@ void renderBoard()
             {
               switch (attackTarget)
               {
-                case AttackTarget::Self:
+                case AttackTarget::ProtectAllies:
                 {
-                  drawBoardCursor(selectedPawnX, selectedPawnY);
+                  if (board[boardY][boardX] < 3)
+                    drawBoardCursor(boardX, boardY);
                   break;
                 }
                 case AttackTarget::AllEnemies:
@@ -194,7 +195,7 @@ void renderBoard()
                     drawBoardCursor(boardX, boardY);
                   break;
                 }
-                case AttackTarget::AllAllies:
+                case AttackTarget::HealAllies:
                 {
                   if ((board[boardY][boardX] < 3) && (pawn[board[boardY][boardX]].energy < pawn[board[boardY][boardX]].maxEnergy))
                     drawBoardCursor(boardX, boardY);

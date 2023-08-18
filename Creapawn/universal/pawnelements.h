@@ -73,7 +73,7 @@ const uint8_t speciesStats[32][3]
 
   //NATURE
   /*BEETHRONE*/{0, 2, 2},
-  /*BUBBLUE*/{2, 2, 0,},
+  /*BUBBLUE*/{2, 2, 0},
   /*BUNNERINA*/{1, 0, 3},
   /*CHAMPANZON*/{1, 2, 1},
   /*CHLOROAR*/{1, 1, 2},
@@ -346,7 +346,7 @@ void createStats (Pawn & pawn)
   pawn.type = obtainType(pawn.species);
   pawn.maxEnergy = ((pawn.level * (zodiacStats[zodiacNumber][energyStat] + speciesStats[speciesNumber][energyStat] + 4)) + 15) / 5;
   pawn.power = ((pawn.level * (zodiacStats[zodiacNumber][powerStat] + speciesStats[speciesNumber][powerStat] + 4)) + 15) / 10;
-  pawn.actionCost = 7 - ((zodiacStats[zodiacNumber][actionCostStat] + speciesStats[speciesNumber][actionCostStat]) / 2);
+  pawn.actionCost = 7 - ((zodiacStats[zodiacNumber][actionCostStat] + speciesStats[speciesNumber][actionCostStat] + 1) / 2);
   //pawn.energy = pawn.maxEnergy;
   pawn.specialAttack = getSpecialAttack(pawn);
 }
