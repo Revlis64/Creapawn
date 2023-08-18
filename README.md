@@ -49,7 +49,7 @@ August 8th, 2023 Bug Fixes and Changes (1.0.9):
 
 August 18th, 2023 Bug Fixes and Changes (1.0.10)
 
-  _ Bug Fix/Change 1. During battle, starting AP (action points) has been increrased to six.
+  _ Bug Fix/Change 1. During battle, starting AP (action points) has been increased to six.
 
   _ Bug Fix/Change 2. The amount of AP (action points) replenished at the beginning of each turn has been reduced to three. 
 
@@ -58,3 +58,9 @@ August 18th, 2023 Bug Fixes and Changes (1.0.10)
   - Bug Fix/Change 4. Changes to team selection option within pawn storage box.
 
   - Bug Fix/Change 5. Small visual touch ups and text changes.
+
+  - Bug Fix/Change 6. Endure is now called "Defend All" and will defend all the player's pawns active in battle from attack.
+
+  - Bug Fix/Change 7. Heal All will now heal all the player's pawns for full energy.
+
+  - Bug Fix/Change 8. to the computer opponent's actions in battle.
